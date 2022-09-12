@@ -31,7 +31,7 @@ class LEDProgressBar:
 
 class LEDProgressBarPlugin(plugin.StartupPlugin, plugin.SettingsPlugin,
                            plugin.AssetPlugin,
-                           plugin.TemplatePlugin):
+                           plugin.TemplatePlugin, plugin.EventHandlerPlugin, plugin.ProgressPlugin):
 
     def __init__(self, *args, **kwargs):
         self.p_bar = LEDProgressBar()
