@@ -16,7 +16,7 @@ class Colour:
         self.blue = blue
 
 
-class LEDProgressBar(self):
+class LEDProgressBar:
 
     def __init__(self):
         self.bus = smbus2.SMBus(1)
