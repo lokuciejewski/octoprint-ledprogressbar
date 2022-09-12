@@ -24,8 +24,6 @@ class LEDProgressBar:
         self.device_address = 0x69
 
     def set_progress(self, percentage: float, colour: Colour):
-        logging.info(
-            f"Sending percentage {percentage} with colour RGB({colour.red}, {colour.green}, {colour.blue})")
         self.bus.write_i2c_block_data(self.device_address, 0, [int(
             percentage), colour.red, colour.green, colour.blue])
 
@@ -94,7 +92,10 @@ class LEDProgressBarPlugin(plugin.StartupPlugin, plugin.SettingsPlugin,
             self.p_bar.set_progress(100, Colour(0, 10, 10)) 
 
     def on_print_progress(self, storage, path, progress):
-        self.p_bar.set_progress(progress, Colour(0, 10, 0))
+        colour = Colour(0, 10, 0)        
+        self._logger.info(
+            f"Sending percentage {progress} with colour RGB({colour.red}, {colour.green}, {colour.blue})")
+        self.p_bar.set_progress(progress, colour)
 
 
 
