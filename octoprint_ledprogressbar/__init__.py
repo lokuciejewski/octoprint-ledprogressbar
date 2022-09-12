@@ -4,6 +4,7 @@ import octoprint.plugin as plugin
 import logging
 import smbus2
 from octoprint.events import Events
+import time
 
 class Colour:
     red: int
@@ -76,6 +77,12 @@ class LEDProgressBarPlugin(plugin.StartupPlugin, plugin.SettingsPlugin,
 
     def on_after_startup(self):
         self._logger.info("LED Progress Bar loaded!")
+        self.p_bar.set_progress(100.0, Colour(10, 10, 10))
+        time.sleep(0.5)
+        self.p_bar.set_progress(50.0. Colour(10, 10, 10))
+        time.sleep(0.5)
+        self.p_bar.set_progress(0, Colour(0, 0, 0))
+
 
     def on_event(self, event, payload):
         if event == Events.PRINT_STARTED:
