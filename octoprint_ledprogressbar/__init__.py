@@ -23,7 +23,7 @@ class LEDProgressBar:
         self.device_address = 0x69
 
     def set_progress(self, percentage: float, colour: Colour):
-        logging.info(
+        self._logger.info(
             f"Sending percentage {percentage} with colour RGB({colour.red}, {colour.green}, {colour.blue})")
         self.bus.write_i2c_block_data(self.device_address, 0, int(
             percentage), colour.red, colour.green, colour.blue)
@@ -74,16 +74,16 @@ class LEDProgressBarPlugin(plugin.StartupPlugin, plugin.SettingsPlugin,
             "less": ["less/ledprogressbar.less"]
         }
 
-    # ~~ Softwareupdate hook
-
     def on_after_startup(self):
         self._logger.info("LED Progress Bar loaded!")
 
     def on_event(self, event, payload):
         if event == Events.PRINT_STARTED:
+            self._logger.info("Print started")
             self.p_bar.set_progress(0, Colour(0, 10, 0))
 
         elif event == Events.PRINT_DONE:
+            self._logger.info("Print completed")
             self.p_bar.set_progress(100, Colour(0, 10, 10)) 
 
     def on_print_progress(self, storage, path, progress):
