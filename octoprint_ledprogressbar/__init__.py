@@ -26,8 +26,8 @@ class LEDProgressBar:
     def set_progress(self, percentage: float, colour: Colour):
         logging.info(
             f"Sending percentage {percentage} with colour RGB({colour.red}, {colour.green}, {colour.blue})")
-        self.bus.write_i2c_block_data(self.device_address, 0, int(
-            percentage), colour.red, colour.green, colour.blue)
+        self.bus.write_i2c_block_data(self.device_address, 0, [int(
+            percentage), colour.red, colour.green, colour.blue])
 
 
 class LEDProgressBarPlugin(plugin.StartupPlugin, plugin.SettingsPlugin,
