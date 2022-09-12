@@ -29,9 +29,9 @@ class LEDProgressBar:
             percentage), colour.red, colour.green, colour.blue)
 
 
-class LEDProgressBarPlugin(plugin.StartupPlugin, octoprint.plugin.SettingsPlugin,
-                           octoprint.plugin.AssetPlugin,
-                           octoprint.plugin.TemplatePlugin):
+class LEDProgressBarPlugin(plugin.StartupPlugin, plugin.SettingsPlugin,
+                           plugin.AssetPlugin,
+                           plugin.TemplatePlugin):
 
     def __init__(self, *args, **kwargs):
         super(LEDProgressBar, self).__init__(*args, **kwargs)
